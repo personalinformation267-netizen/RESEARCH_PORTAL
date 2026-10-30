@@ -1,0 +1,2153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ResearchPortal — Effortless Research Paper Analysis | Ankit Raj</title>
+  <meta name="description" content="Upload, summarize, and explore insights from academic papers using AI-powered tools. A Class 10 Computer Practical project by Ankit Raj.">
+
+  <!-- Futuristic Academic Typography: Syne, Space Grotesk & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       ANKIT RAJ — RESEARCHPORTAL DESIGN SYSTEM
+       Theme: Futuristic Midnight Academic Technology & Cyber Research Suite
+       Palette: Midnight Navy, Deep Indigo, Electric Cyan, Neon Highlights, Soft Slate
+       ========================================================================== */
+    :root {
+      --bg-dark: #070A12;
+      --bg-surface: #0B1120;
+      --bg-card: rgba(15, 23, 42, 0.72);
+      --bg-card-hover: rgba(22, 36, 65, 0.82);
+      
+      --color-cyan: #00F2FE;
+      --color-cyan-glow: #06B6D4;
+      --color-blue: #38BDF8;
+      --color-indigo: #6366F1;
+      --color-purple: #8B5CF6;
+      
+      --text-main: #F8FAFC;
+      --text-muted: #94A3B8;
+      --text-dim: #64748B;
+      
+      --border-cyan-subtle: rgba(6, 182, 212, 0.22);
+      --border-cyan-glow: rgba(0, 242, 254, 0.45);
+      --border-card: rgba(255, 255, 255, 0.08);
+      
+      --font-display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-headline: 'Syne', sans-serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+      
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-xl: 28px;
+      
+      --glow-cyan: 0 0 25px rgba(0, 242, 254, 0.25);
+      --glow-cyan-lg: 0 0 50px rgba(6, 182, 212, 0.35);
+      --shadow-glass: 0 16px 40px rgba(0, 0, 0, 0.45);
+      
+      --transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+      --container-max: 1240px;
+    }
+
+    /* Base Reset */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      line-height: 1.6;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Subtle Futuristic Ambient Glow Grid Background */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: 
+        radial-gradient(circle at 15% 20%, rgba(6, 182, 212, 0.12) 0%, transparent 45%),
+        radial-gradient(circle at 85% 75%, rgba(99, 102, 241, 0.14) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.08) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      transition: var(--transition);
+    }
+
+    button, input {
+      font-family: inherit;
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* All visible headings strictly use H3 as mandated by Section 17 */
+    h3 {
+      font-family: var(--font-display);
+      font-weight: 700;
+      color: var(--text-main);
+      line-height: 1.25;
+      margin: 0;
+    }
+
+    .cyber-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--color-cyan);
+      background: rgba(6, 182, 212, 0.12);
+      border: 1px solid var(--border-cyan-glow);
+      padding: 5px 14px;
+      border-radius: 100px;
+      box-shadow: 0 0 16px rgba(6, 182, 212, 0.2);
+      margin-bottom: 14px;
+    }
+
+    .cyber-pill-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--color-cyan);
+      box-shadow: 0 0 10px var(--color-cyan);
+      animation: pulseGlow 1.8s infinite ease-in-out;
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.8); }
+    }
+
+    .section-title {
+      font-size: clamp(2.1rem, 3.6vw, 3rem);
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #FFFFFF 0%, #E2E8F0 50%, var(--color-blue) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .section-description {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      max-width: 680px;
+      line-height: 1.7;
+    }
+
+    .section-header-center {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 56px;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 13px 28px;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 0.96rem;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-cyan {
+      background: linear-gradient(135deg, #00F2FE 0%, #06B6D4 100%);
+      color: #070A12;
+      font-weight: 700;
+      box-shadow: var(--glow-cyan);
+    }
+
+    .btn-cyan:hover {
+      background: linear-gradient(135deg, #38BDF8 0%, #00F2FE 100%);
+      transform: translateY(-2px);
+      box-shadow: var(--glow-cyan-lg);
+    }
+
+    .btn-glass {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      color: var(--text-main);
+      border: 1px solid var(--border-cyan-subtle);
+    }
+
+    .btn-glass:hover {
+      background: rgba(6, 182, 212, 0.14);
+      border-color: var(--color-cyan);
+      color: #FFFFFF;
+      transform: translateY(-2px);
+      box-shadow: var(--glow-cyan);
+    }
+
+    /* ==========================================================================
+       1. NAVIGATION BAR
+       Translucent Glassmorphism with Glowing Cyan Accents
+       ========================================================================== */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(7, 10, 18, 0.82);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-card);
+      transition: var(--transition);
+    }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 78px;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .logo-badge-icon {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, #00F2FE 0%, #6366F1 100%);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #070A12;
+      box-shadow: var(--glow-cyan);
+    }
+
+    .logo-badge-icon svg {
+      width: 22px;
+      height: 22px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.2;
+    }
+
+    .logo-text-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .logo-text-main {
+      font-family: var(--font-display);
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+    }
+
+    .logo-text-sub {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--color-cyan);
+      text-transform: uppercase;
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      list-style: none;
+      gap: 30px;
+    }
+
+    .nav-link {
+      font-size: 0.94rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      position: relative;
+      padding: 6px 0;
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: var(--color-cyan);
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--color-cyan);
+      box-shadow: 0 0 8px var(--color-cyan);
+      transition: var(--transition);
+    }
+
+    .nav-link:hover::after, .nav-link.active::after {
+      width: 100%;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .btn-login-nav {
+      padding: 9px 20px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      border-radius: var(--radius-sm);
+      background: rgba(6, 182, 212, 0.12);
+      color: var(--color-cyan);
+      border: 1px solid var(--border-cyan-glow);
+      cursor: pointer;
+      box-shadow: 0 0 12px rgba(6, 182, 212, 0.18);
+      transition: var(--transition);
+    }
+
+    .btn-login-nav:hover {
+      background: var(--color-cyan);
+      color: #070A12;
+      box-shadow: var(--glow-cyan);
+      transform: translateY(-2px);
+    }
+
+    .menu-toggle {
+      display: none;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      color: var(--text-main);
+    }
+
+    .menu-toggle svg {
+      width: 26px;
+      height: 26px;
+    }
+
+    /* ==========================================================================
+       2. HERO SECTION (Using hero3.jpg)
+       Futuristic Cyber Research Suite
+       ========================================================================== */
+    .hero-section {
+      position: relative;
+      padding: 90px 0 110px;
+      background-image: url('assets/images/hero3.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      border-bottom: 1px solid var(--border-card);
+      overflow: hidden;
+    }
+
+    /* Dark futuristic gradient overlay to ensure crystal clear contrast */
+    .hero-backdrop-gradient {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, 
+        rgba(7, 10, 18, 0.95) 0%, 
+        rgba(11, 17, 32, 0.88) 55%, 
+        rgba(15, 23, 42, 0.82) 100%);
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      position: relative;
+      z-index: 10;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .hero-content {
+      max-width: 650px;
+    }
+
+    .hero-title {
+      font-family: var(--font-headline);
+      font-size: clamp(2.5rem, 4.8vw, 4.1rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.025em;
+      margin-bottom: 22px;
+      background: linear-gradient(135deg, #FFFFFF 0%, #F1F5F9 45%, var(--color-cyan) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-description {
+      font-size: 1.22rem;
+      line-height: 1.7;
+      color: var(--text-muted);
+      margin-bottom: 36px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      align-items: center;
+      margin-bottom: 42px;
+    }
+
+    .hero-stat-cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding-top: 28px;
+      border-top: 1px solid var(--border-card);
+    }
+
+    .hero-stat-box {
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border-cyan-subtle);
+      border-radius: var(--radius-sm);
+      padding: 12px 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .hero-stat-num {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--color-cyan);
+      line-height: 1.1;
+    }
+
+    .hero-stat-lbl {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* Right visual futuristic display */
+    .hero-preview-frame {
+      position: relative;
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(16px);
+      border-radius: var(--radius-xl);
+      padding: 14px;
+      border: 1px solid var(--border-cyan-glow);
+      box-shadow: var(--shadow-glass), var(--glow-cyan);
+    }
+
+    .hero-preview-img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      border-radius: calc(var(--radius-xl) - 8px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .hero-hud-badge {
+      position: absolute;
+      bottom: -18px;
+      left: 30px;
+      background: rgba(11, 17, 32, 0.92);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--color-cyan);
+      border-radius: var(--radius-sm);
+      padding: 12px 22px;
+      box-shadow: var(--glow-cyan);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .hud-icon-ai {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, #00F2FE 0%, #6366F1 100%);
+      color: #070A12;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.85rem;
+    }
+
+    .hud-title {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #FFFFFF;
+    }
+
+    .hud-sub {
+      font-size: 0.75rem;
+      color: var(--color-cyan);
+    }
+
+    /* ==========================================================================
+       3. ABOUT THE PROJECT
+       Futuristic Glassmorphic Info Panels & Attribution
+       ========================================================================== */
+    .about-section {
+      padding: 110px 0;
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-card);
+      position: relative;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .about-text-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .about-quote-box {
+      background: rgba(15, 23, 42, 0.7);
+      border-left: 4px solid var(--color-cyan);
+      padding: 18px 24px;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      font-size: 1.05rem;
+      color: #E2E8F0;
+      font-style: italic;
+      border-top: 1px solid var(--border-card);
+      border-right: 1px solid var(--border-card);
+      border-bottom: 1px solid var(--border-card);
+    }
+
+    /* Technology Stack Panel */
+    .tech-panel {
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid var(--border-cyan-subtle);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      box-shadow: var(--shadow-glass);
+    }
+
+    .tech-panel-header {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--color-cyan);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .tech-chips-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .tech-chip {
+      font-size: 0.84rem;
+      font-weight: 600;
+      padding: 7px 16px;
+      background: rgba(6, 182, 212, 0.08);
+      color: #F1F5F9;
+      border: 1px solid rgba(6, 182, 212, 0.25);
+      border-radius: 100px;
+      transition: var(--transition);
+    }
+
+    .tech-chip:hover {
+      background: var(--color-cyan);
+      color: #070A12;
+      box-shadow: var(--glow-cyan);
+      border-color: var(--color-cyan);
+    }
+
+    /* Project Attribution Card */
+    .student-badge-card {
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 27, 75, 0.6) 100%);
+      border: 1px solid var(--border-cyan-glow);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      box-shadow: var(--glow-cyan);
+    }
+
+    .student-cred-row {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-top: 14px;
+    }
+
+    .cred-item-cell {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cred-meta-label {
+      font-size: 0.74rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .cred-meta-value {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      margin-top: 2px;
+    }
+
+    .about-visual-display {
+      position: relative;
+    }
+
+    .about-preview-graphic {
+      width: 100%;
+      height: 480px;
+      object-fit: cover;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-cyan-subtle);
+      box-shadow: var(--shadow-glass);
+    }
+
+    /* ==========================================================================
+       4. RESEARCH PAPER UPLOAD SECTION (Using hero2.jpg)
+       High-Tech Neural Dropzone & Client Verification
+       ========================================================================== */
+    .upload-section {
+      position: relative;
+      padding: 110px 0;
+      background-image: url('assets/images/hero2.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      border-bottom: 1px solid var(--border-card);
+      overflow: hidden;
+    }
+
+    .upload-overlay {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, rgba(11, 17, 32, 0.88) 0%, rgba(7, 10, 18, 0.96) 100%);
+    }
+
+    .upload-box-wrapper {
+      position: relative;
+      z-index: 10;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .upload-glass-card {
+      background: rgba(11, 17, 32, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border-cyan-glow);
+      border-radius: var(--radius-xl);
+      padding: 44px;
+      box-shadow: var(--shadow-glass), var(--glow-cyan-lg);
+    }
+
+    .dropzone-neural {
+      border: 2px dashed rgba(6, 182, 212, 0.4);
+      border-radius: var(--radius-md);
+      padding: 48px 24px;
+      text-align: center;
+      background: rgba(15, 23, 42, 0.6);
+      cursor: pointer;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .dropzone-neural:hover, .dropzone-neural.dragover {
+      border-color: var(--color-cyan);
+      background: rgba(6, 182, 212, 0.1);
+      box-shadow: inset 0 0 30px rgba(6, 182, 212, 0.2);
+      transform: scale(1.008);
+    }
+
+    .neural-icon-circle {
+      width: 72px;
+      height: 72px;
+      margin: 0 auto 18px;
+      background: rgba(6, 182, 212, 0.15);
+      border: 1px solid var(--color-cyan);
+      color: var(--color-cyan);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--glow-cyan);
+      transition: var(--transition);
+    }
+
+    .dropzone-neural:hover .neural-icon-circle {
+      background: var(--color-cyan);
+      color: #070A12;
+      transform: translateY(-4px);
+    }
+
+    .neural-icon-circle svg {
+      width: 36px;
+      height: 36px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+    }
+
+    /* Required text verbatim */
+    .dropzone-text-lead {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      margin-bottom: 6px;
+    }
+
+    .dropzone-text-sub {
+      font-size: 0.95rem;
+      color: var(--color-cyan);
+      margin-bottom: 22px;
+    }
+
+    .file-input-ghost {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    /* Selected File State */
+    .selected-file-panel {
+      margin-top: 24px;
+      padding: 16px 22px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid var(--color-cyan);
+      border-radius: var(--radius-sm);
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: var(--glow-cyan);
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    .selected-file-panel.active {
+      display: flex;
+    }
+
+    .file-pill-group {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .file-badge-icon {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%);
+      color: #FFFFFF;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.75rem;
+    }
+
+    .file-name-text {
+      font-weight: 600;
+      color: #FFFFFF;
+      font-size: 0.96rem;
+    }
+
+    .file-size-text {
+      font-size: 0.8rem;
+      color: var(--color-cyan);
+    }
+
+    .btn-discard {
+      background: transparent;
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      color: #F87171;
+      padding: 5px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.82rem;
+      transition: var(--transition);
+    }
+
+    .btn-discard:hover {
+      background: #EF4444;
+      color: #FFFFFF;
+    }
+
+    .upload-msg-box {
+      margin-top: 16px;
+      padding: 12px 18px;
+      border-radius: var(--radius-sm);
+      font-size: 0.88rem;
+      display: none;
+    }
+
+    .upload-msg-box.error {
+      display: block;
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid #EF4444;
+      color: #FCA5A5;
+    }
+
+    .upload-msg-box.success {
+      display: block;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid #10B981;
+      color: #6EE7B7;
+    }
+
+    .upload-tech-notice {
+      margin-top: 24px;
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    /* ==========================================================================
+       5. KEY FEATURES
+       Four Premium Glassmorphic Cyber Cards
+       ========================================================================== */
+    .features-section {
+      padding: 110px 0;
+      background: var(--bg-dark);
+      border-bottom: 1px solid var(--border-card);
+    }
+
+    .features-cyber-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 28px;
+    }
+
+    .feature-cyber-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid var(--border-cyan-subtle);
+      box-shadow: var(--shadow-glass);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .feature-cyber-card:hover {
+      transform: translateY(-8px);
+      background: var(--bg-card-hover);
+      border-color: var(--color-cyan);
+      box-shadow: var(--shadow-glass), var(--glow-cyan);
+    }
+
+    .feature-img-box {
+      position: relative;
+      height: 200px;
+      overflow: hidden;
+      background: #0F172A;
+    }
+
+    .feature-card-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .feature-cyber-card:hover .feature-card-photo {
+      transform: scale(1.08);
+    }
+
+    .feature-index-tag {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: rgba(7, 10, 18, 0.85);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--border-cyan-glow);
+      color: var(--color-cyan);
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.82rem;
+      padding: 3px 10px;
+      border-radius: 100px;
+    }
+
+    .feature-content-body {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .feature-badge-mini {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--color-cyan);
+      margin-bottom: 8px;
+    }
+
+    .feature-title-text {
+      font-size: 1.35rem;
+      color: #FFFFFF;
+      margin-bottom: 10px;
+      font-family: var(--font-display);
+    }
+
+    .feature-desc-text {
+      font-size: 0.94rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 16px;
+      flex-grow: 1;
+    }
+
+    /* ==========================================================================
+       6. ANALYSIS VISUALIZATIONS
+       Two Cyber Analytic Panels
+       ========================================================================== */
+    .vis-section {
+      padding: 110px 0;
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-card);
+    }
+
+    .vis-panel-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 36px;
+    }
+
+    .vis-hud-panel {
+      background: var(--bg-card);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border-cyan-subtle);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-glass);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .vis-hud-panel:hover {
+      border-color: var(--color-cyan);
+      box-shadow: var(--shadow-glass), var(--glow-cyan);
+    }
+
+    .vis-panel-top {
+      padding: 22px 28px;
+      background: rgba(15, 23, 42, 0.9);
+      border-bottom: 1px solid var(--border-card);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .vis-panel-title {
+      font-size: 1.3rem;
+      font-family: var(--font-display);
+      color: #FFFFFF;
+    }
+
+    .vis-live-badge {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--color-cyan);
+      background: rgba(6, 182, 212, 0.15);
+      border: 1px solid var(--border-cyan-glow);
+      padding: 4px 10px;
+      border-radius: 100px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .vis-media-container {
+      padding: 20px;
+      background: #0B0F19;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .vis-media-img {
+      width: 100%;
+      height: auto;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-card);
+    }
+
+    .vis-panel-bottom {
+      padding: 18px 28px;
+      background: rgba(15, 23, 42, 0.8);
+      border-top: 1px solid var(--border-card);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .vis-meta-tag {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--color-cyan);
+    }
+
+    /* ==========================================================================
+       7. CONTACT & CREDITS SECTION
+       Clean Project Submission & Jump Back to Upload
+       ========================================================================== */
+    .contact-section {
+      padding: 110px 0;
+      background: var(--bg-dark);
+      border-bottom: 1px solid var(--border-card);
+    }
+
+    .contact-glass-wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+      background: var(--bg-card);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border-cyan-subtle);
+      border-radius: var(--radius-xl);
+      padding: 48px;
+      box-shadow: var(--shadow-glass);
+    }
+
+    .contact-inner-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .contact-details-col {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .contact-title-main {
+      font-size: 2rem;
+      font-family: var(--font-display);
+      color: #FFFFFF;
+    }
+
+    .contact-info-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 6px;
+    }
+
+    .contact-info-item {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      font-size: 0.94rem;
+    }
+
+    .contact-info-lbl {
+      font-weight: 700;
+      color: var(--color-cyan);
+      min-width: 140px;
+    }
+
+    .contact-info-val {
+      color: var(--text-main);
+    }
+
+    .contact-nav-col {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-md);
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .contact-nav-col h3 {
+      font-size: 1.25rem;
+      font-family: var(--font-display);
+      color: #FFFFFF;
+    }
+
+    .contact-nav-col p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+
+    /* Client Demonstration Feedback form */
+    .input-field-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .input-field-lbl {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--color-cyan);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .input-field-ctrl {
+      padding: 10px 14px;
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-sm);
+      font-size: 0.9rem;
+      background: rgba(7, 10, 18, 0.8);
+      color: #FFFFFF;
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .input-field-ctrl:focus {
+      border-color: var(--color-cyan);
+      box-shadow: var(--glow-cyan);
+    }
+
+    /* ==========================================================================
+       8. FOOTER
+       Midnight Navy & Deep Indigo Futuristic Footer
+       ========================================================================== */
+    .site-footer {
+      background-color: #060911;
+      border-top: 1px solid var(--border-card);
+      color: var(--text-muted);
+      padding: 72px 0 36px;
+    }
+
+    .footer-content-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 56px;
+    }
+
+    .footer-brand-area h3 {
+      font-size: 1.8rem;
+      font-family: var(--font-headline);
+      color: #FFFFFF;
+      margin-bottom: 12px;
+    }
+
+    .footer-brand-area p {
+      color: var(--text-muted);
+      font-size: 0.98rem;
+      max-width: 380px;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .footer-student-box {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid var(--border-cyan-subtle);
+      border-radius: var(--radius-sm);
+      padding: 16px;
+      font-size: 0.88rem;
+      line-height: 1.7;
+    }
+
+    .footer-links-col h3 {
+      font-size: 1.15rem;
+      color: #FFFFFF;
+      margin-bottom: 18px;
+      font-family: var(--font-display);
+    }
+
+    .footer-links-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-links-list a {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+    }
+
+    .footer-links-list a:hover {
+      color: var(--color-cyan);
+      padding-left: 4px;
+    }
+
+    .footer-bottom-bar {
+      border-top: 1px solid var(--border-card);
+      padding-top: 28px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      font-size: 0.84rem;
+      color: var(--text-dim);
+    }
+
+    /* Modal Dialog for Login Demo */
+    .cyber-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(7, 10, 18, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .cyber-modal-overlay.active {
+      display: flex;
+    }
+
+    .cyber-modal-container {
+      background: #0B1120;
+      border: 1px solid var(--border-cyan-glow);
+      border-radius: var(--radius-md);
+      max-width: 440px;
+      width: 100%;
+      padding: 34px;
+      box-shadow: var(--shadow-glass), var(--glow-cyan-lg);
+      position: relative;
+    }
+
+    .modal-exit-btn {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: transparent;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--text-muted);
+    }
+
+    .modal-exit-btn:hover {
+      color: var(--color-cyan);
+    }
+
+    /* ==========================================================================
+       RESPONSIVE DESIGN (360px, 390px, 768px, 1366px)
+       ========================================================================== */
+    @media (max-width: 1080px) {
+      .features-cyber-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 992px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .vis-panel-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-content-grid {
+        grid-template-columns: 1fr;
+        gap: 36px;
+      }
+
+      .contact-inner-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .navbar {
+        height: 70px;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      .nav-menu {
+        position: fixed;
+        top: 70px;
+        left: 0;
+        right: 0;
+        background: rgba(11, 17, 32, 0.98);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        padding: 26px 20px;
+        gap: 20px;
+        border-bottom: 1px solid var(--border-cyan-subtle);
+        box-shadow: var(--shadow-glass);
+        transform: translateY(-120%);
+        opacity: 0;
+        pointer-events: none;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+      }
+
+      .nav-menu.open {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .hero-section {
+        padding: 50px 0 70px;
+      }
+
+      .hero-title {
+        font-size: 2.3rem;
+      }
+
+      .features-cyber-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .upload-glass-card {
+        padding: 24px;
+      }
+
+      .contact-glass-wrapper {
+        padding: 28px 20px;
+      }
+
+      .student-cred-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 390px) {
+      .hero-title {
+        font-size: 2rem;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        width: 100%;
+      }
+    }
+
+    /* ==========================================================================
+       PRINT SPECIFIC STYLES (School practical submission / PDF export)
+       ========================================================================== */
+    @media print {
+      body {
+        background: #FFFFFF !important;
+        color: #000000 !important;
+        font-size: 12pt;
+      }
+
+      body::before {
+        display: none !important;
+      }
+
+      .site-header, .menu-toggle, .btn-login-nav, .hero-actions, .neural-icon-circle, .btn-discard {
+        display: none !important;
+      }
+
+      .hero-section, .upload-section {
+        background-image: none !important;
+        color: #000000 !important;
+        padding: 20px 0 !important;
+      }
+
+      .hero-backdrop-gradient, .upload-overlay {
+        display: none !important;
+      }
+
+      .section-title, .hero-title {
+        -webkit-text-fill-color: #000000 !important;
+        color: #000000 !important;
+      }
+
+      .upload-glass-card, .feature-cyber-card, .vis-hud-panel, .contact-glass-wrapper {
+        background: #FFFFFF !important;
+        color: #000000 !important;
+        box-shadow: none !important;
+        border: 1px solid #999999 !important;
+        break-inside: avoid;
+      }
+
+      .site-footer {
+        background: #FFFFFF !important;
+        color: #000000 !important;
+        border-top: 1px solid #CCCCCC !important;
+      }
+
+      .site-footer h3, .site-footer p {
+        color: #000000 !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========================================================================
+       1. NAVIGATION BAR
+       ======================================================================== -->
+  <header class="site-header" id="site-header">
+    <div class="container navbar">
+      <a href="#home" class="brand-logo" aria-label="ResearchPortal Home">
+        <div class="logo-badge-icon">
+          <!-- Cyber Research Node SVG -->
+          <svg viewBox="0 0 24 24">
+            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+            <polyline points="2 17 12 22 22 17"></polyline>
+            <polyline points="2 12 12 17 22 12"></polyline>
+          </svg>
+        </div>
+        <div class="logo-text-group">
+          <span class="logo-text-main">ResearchPortal</span>
+          <span class="logo-text-sub">AI Academic Suite</span>
+        </div>
+      </a>
+
+      <!-- Navigation Links -->
+      <nav>
+        <ul class="nav-menu" id="navMenu">
+          <li><a href="#home" class="nav-link active">Home</a></li>
+          <li><a href="#features" class="nav-link">Features</a></li>
+          <li><a href="#upload" class="nav-link">Upload</a></li>
+          <li><a href="#visualizations" class="nav-link">Visualizations</a></li>
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <button type="button" class="btn-login-nav" id="btnLoginNav" aria-label="Open portal login">Login</button>
+        <button type="button" class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ======================================================================
+         2. HERO SECTION (Using hero3.jpg)
+         ====================================================================== -->
+    <section class="hero-section" id="home">
+      <div class="hero-backdrop-gradient"></div>
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <div class="cyber-pill">
+            <span class="cyber-pill-dot"></span>
+            Class 10 Computer Practical &bull; Ankit Raj
+          </div>
+          <!-- Heading 3 strictly used -->
+          <h3 class="hero-title">Effortless Research Paper Analysis</h3>
+          <p class="hero-description">
+            Upload, summarize, and explore insights from academic papers using AI-powered tools.
+          </p>
+          <div class="hero-actions">
+            <a href="#upload" class="btn btn-cyan" id="heroCtaUpload">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="17 8 12 3 7 8"></polyline>
+                <line x1="12" y1="3" x2="12" y2="15"></line>
+              </svg>
+              Upload Paper
+            </a>
+            <a href="#features" class="btn btn-glass">
+              Explore Features
+            </a>
+          </div>
+          <div class="hero-stat-cards">
+            <div class="hero-stat-box">
+              <span class="hero-stat-num">4 Core</span>
+              <span class="hero-stat-lbl">AI Modules</span>
+            </div>
+            <div class="hero-stat-box">
+              <span class="hero-stat-num">NLP</span>
+              <span class="hero-stat-lbl">Summarization</span>
+            </div>
+            <div class="hero-stat-box">
+              <span class="hero-stat-num">100%</span>
+              <span class="hero-stat-lbl">Client Sandbox</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Side Futuristic Preview Card -->
+        <div class="hero-preview-frame">
+          <img src="assets/images/project-preview.jpg" alt="Futuristic AI ResearchPortal dashboard preview" class="hero-preview-img">
+          <div class="hero-hud-badge">
+            <div class="hud-icon-ai">AI</div>
+            <div>
+              <div class="hud-title">Neural Engine Active</div>
+              <div class="hud-sub">Automated Academic Ingestion</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         3. ABOUT THE PROJECT
+         ====================================================================== -->
+    <section class="about-section" id="about">
+      <div class="container">
+        <div class="about-grid">
+          <div class="about-text-panel">
+            <span class="cyber-pill">System Overview</span>
+            <!-- Heading 3 strictly used -->
+            <h3 class="section-title">About The Project</h3>
+            <p class="section-description">
+              This project leverages AI and Natural Language Processing (NLP) to analyze research papers, generate summaries, extract keywords, and visualize trends.
+            </p>
+
+            <div class="about-quote-box">
+              "Accelerating academic discovery through intelligent document parsing, automated topic clustering, and intuitive visual analytics."
+            </div>
+
+            <!-- Technology Stack Information Panel -->
+            <div class="tech-panel">
+              <div class="tech-panel-header">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-cyan)" stroke-width="2">
+                  <polyline points="16 18 22 12 16 6"></polyline>
+                  <polyline points="8 6 2 12 8 18"></polyline>
+                </svg>
+                Core Tech Stack
+              </div>
+              <div class="tech-chips-wrap">
+                <span class="tech-chip">Python</span>
+                <span class="tech-chip">AI/ML</span>
+                <span class="tech-chip">NLP</span>
+                <span class="tech-chip">PDF Parsing</span>
+                <span class="tech-chip">Chart.js</span>
+                <span class="tech-chip">Modern Web Front-end</span>
+              </div>
+            </div>
+
+            <!-- Project Attribution -->
+            <div class="student-badge-card">
+              <span class="cyber-pill" style="margin-bottom: 6px;">School Practical Credentials</span>
+              <div class="student-cred-row">
+                <div class="cred-item-cell">
+                  <span class="cred-meta-label">Project Assigned By</span>
+                  <span class="cred-meta-value">Prince Das, Computer Teacher</span>
+                </div>
+                <div class="cred-item-cell">
+                  <span class="cred-meta-label">Design By</span>
+                  <span class="cred-meta-value">Ankit Raj</span>
+                </div>
+                <div class="cred-item-cell">
+                  <span class="cred-meta-label">Class</span>
+                  <span class="cred-meta-value">Class 10</span>
+                </div>
+                <div class="cred-item-cell">
+                  <span class="cred-meta-label">Purpose</span>
+                  <span class="cred-meta-value">Frontend Demonstration</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="about-visual-display">
+            <img src="assets/images/project-preview.jpg" alt="Research workspace illustrating academic paper analysis" class="about-preview-graphic">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         4. RESEARCH PAPER UPLOAD SECTION (Using hero2.jpg)
+         ====================================================================== -->
+    <section class="upload-section" id="upload">
+      <div class="upload-overlay"></div>
+      <div class="container upload-box-wrapper">
+        <div class="section-header-center">
+          <span class="cyber-pill">Document Ingestion</span>
+          <!-- Heading 3 strictly used -->
+          <h3 class="section-title">Upload Your Research Paper</h3>
+          <p class="section-description" style="color: #CBD5E1;">
+            Experience the interactive frontend document selection interface with instant file validation.
+          </p>
+        </div>
+
+        <div class="upload-glass-card">
+          <!-- Dropzone -->
+          <div class="dropzone-neural" id="pdfDropzone" tabindex="0" role="button" aria-label="Drop PDF research manuscript">
+            <input type="file" id="pdfFileInput" class="file-input-ghost" accept=".pdf,application/pdf" aria-label="Select PDF file">
+            <div class="neural-icon-circle">
+              <svg viewBox="0 0 24 24">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="12" y1="18" x2="12" y2="12"></line>
+                <line x1="9" y1="15" x2="12" y2="12"></line>
+                <line x1="15" y1="15" x2="12" y2="12"></line>
+              </svg>
+            </div>
+            <!-- Required text verbatim -->
+            <div class="dropzone-text-lead">Drag & Drop your PDF here</div>
+            <div class="dropzone-text-sub">or click to browse</div>
+            <button type="button" class="btn btn-glass" style="pointer-events: none;">
+              Choose PDF Document
+            </button>
+          </div>
+
+          <!-- Alert Notification Area -->
+          <div class="upload-msg-box" id="uploadMsgBox" role="alert"></div>
+
+          <!-- Selected File Feedback State -->
+          <div class="selected-file-panel" id="selectedFilePanel">
+            <div class="file-pill-group">
+              <div class="file-badge-icon">PDF</div>
+              <div>
+                <div class="file-name-text" id="fileNameText">sample-paper.pdf</div>
+                <div class="file-size-text" id="fileSizeText">2.1 MB &bull; Client verified</div>
+              </div>
+            </div>
+            <button type="button" class="btn-discard" id="btnDiscardFile" aria-label="Remove selected document">Discard</button>
+          </div>
+
+          <p class="upload-tech-notice">
+            <strong>Frontend Demonstration Note:</strong> PDF file selection and format verification operate entirely on the client side. No files are transferred to external servers or remote databases.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         5. KEY FEATURES
+         Four Premium Futuristic Cards
+         ====================================================================== -->
+    <section class="features-section" id="features">
+      <div class="container">
+        <div class="section-header-center">
+          <span class="cyber-pill">Intelligent Modules</span>
+          <!-- Heading 3 strictly used -->
+          <h3 class="section-title">Key Features</h3>
+          <p class="section-description">
+            Four specialized AI-assisted workflows tailored for comprehensive academic literature evaluation.
+          </p>
+        </div>
+
+        <div class="features-cyber-grid">
+          <!-- Feature 1: PDF Analysis -->
+          <article class="feature-cyber-card">
+            <div class="feature-img-box">
+              <img src="assets/images/feature-pdf.jpg" alt="Academic document analysis illustration" class="feature-card-photo">
+              <span class="feature-index-tag">01</span>
+            </div>
+            <div class="feature-content-body">
+              <span class="feature-badge-mini">Extraction</span>
+              <h3 class="feature-title-text">PDF Analysis</h3>
+              <p class="feature-desc-text">Analyze PDFs instantly with AI tools.</p>
+              <div style="font-size: 0.78rem; color: var(--color-cyan);">Multi-column parsing & metadata detection</div>
+            </div>
+          </article>
+
+          <!-- Feature 2: Summary Generation -->
+          <article class="feature-cyber-card">
+            <div class="feature-img-box">
+              <img src="assets/images/feature-summary.jpg" alt="Research document transforming into summary illustration" class="feature-card-photo">
+              <span class="feature-index-tag">02</span>
+            </div>
+            <div class="feature-content-body">
+              <span class="feature-badge-mini">Synthesis</span>
+              <h3 class="feature-title-text">Summary Generation</h3>
+              <p class="feature-desc-text">Generate detailed summaries for each topic.</p>
+              <div style="font-size: 0.78rem; color: var(--color-cyan);">Executive abstracts and methodology digests</div>
+            </div>
+          </article>
+
+          <!-- Feature 3: Topic Modeling -->
+          <article class="feature-cyber-card">
+            <div class="feature-img-box">
+              <img src="assets/images/feature-topics.jpg" alt="Abstract network of connected research topics illustration" class="feature-card-photo">
+              <span class="feature-index-tag">03</span>
+            </div>
+            <div class="feature-content-body">
+              <span class="feature-badge-mini">Clustering</span>
+              <h3 class="feature-title-text">Topic Modeling</h3>
+              <p class="feature-desc-text">Discover key topics and trends from papers.</p>
+              <div style="font-size: 0.78rem; color: var(--color-cyan);">Unsupervised thematic latent analysis</div>
+            </div>
+          </article>
+
+          <!-- Feature 4: Citation Extraction -->
+          <article class="feature-cyber-card">
+            <div class="feature-img-box">
+              <img src="assets/images/feature-citations.jpg" alt="Professional academic reference management illustration" class="feature-card-photo">
+              <span class="feature-index-tag">04</span>
+            </div>
+            <div class="feature-content-body">
+              <span class="feature-badge-mini">Bibliography</span>
+              <h3 class="feature-title-text">Citation Extraction</h3>
+              <p class="feature-desc-text">Organize references and citations quickly.</p>
+              <div style="font-size: 0.78rem; color: var(--color-cyan);">Automated reference linking and BibTeX export</div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         6. ANALYSIS VISUALIZATIONS
+         Two Cyber Analytical Panels
+         ====================================================================== -->
+    <section class="vis-section" id="visualizations">
+      <div class="container">
+        <div class="section-header-center">
+          <span class="cyber-pill">Data Visualizations</span>
+          <!-- Heading 3 strictly used -->
+          <h3 class="section-title">Analysis Visualizations</h3>
+          <p class="section-description">
+            Presentational academic data models showcasing research keyword density and longitudinal topic growth trends.
+          </p>
+        </div>
+
+        <div class="vis-panel-grid">
+          <!-- Panel 1: Keyword Frequency Chart -->
+          <div class="vis-hud-panel">
+            <div class="vis-panel-top">
+              <!-- Heading 3 strictly used -->
+              <h3 class="vis-panel-title">Keyword Frequency Chart</h3>
+              <span class="vis-live-badge">
+                <span class="cyber-pill-dot" style="width: 6px; height: 6px;"></span>
+                Demo Data
+              </span>
+            </div>
+            <div class="vis-media-container">
+              <img src="assets/images/keyword-visualization.jpg" alt="Keyword Frequency Chart displaying normalized academic term counts" class="vis-media-img">
+            </div>
+            <div class="vis-panel-bottom">
+              <span>Metric: TF-IDF Normalized Frequency</span>
+              <span class="vis-meta-tag">Corpus N=2,850 Papers</span>
+            </div>
+          </div>
+
+          <!-- Panel 2: Topic Trend Chart -->
+          <div class="vis-hud-panel">
+            <div class="vis-panel-top">
+              <!-- Heading 3 strictly used -->
+              <h3 class="vis-panel-title">Topic Trend Chart</h3>
+              <span class="vis-live-badge">
+                <span class="cyber-pill-dot" style="width: 6px; height: 6px;"></span>
+                Demo Data
+              </span>
+            </div>
+            <div class="vis-media-container">
+              <img src="assets/images/topic-visualization.jpg" alt="Topic Trend Chart showing multi-year scientific trajectory" class="vis-media-img">
+            </div>
+            <div class="vis-panel-bottom">
+              <span>Timeline: 2020 &mdash; 2026 Academic Growth Index</span>
+              <span class="vis-meta-tag">Trend Trajectory</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         7. CONTACT & PROJECT CREDITS
+         ====================================================================== -->
+    <section class="contact-section" id="contact">
+      <div class="container">
+        <div class="contact-glass-wrapper">
+          <div class="contact-inner-grid">
+            <div class="contact-details-col">
+              <span class="cyber-pill">Coursework Evaluation</span>
+              <!-- Heading 3 strictly used -->
+              <h3 class="contact-title-main">Contact & Project Credits</h3>
+              <p style="color: var(--text-muted); font-size: 0.98rem; line-height: 1.65;">
+                Developed as an academic submission for the Class 10 Computer Practical assessment.
+              </p>
+
+              <ul class="contact-info-list">
+                <li class="contact-info-item">
+                  <span class="contact-info-lbl">Project Name:</span>
+                  <span class="contact-info-val">ResearchPortal</span>
+                </li>
+                <li class="contact-info-item">
+                  <span class="contact-info-lbl">Project Assigned By:</span>
+                  <span class="contact-info-val">Prince Das, Computer Teacher</span>
+                </li>
+                <li class="contact-info-item">
+                  <span class="contact-info-lbl">Designed By:</span>
+                  <span class="contact-info-val">Ankit Raj</span>
+                </li>
+                <li class="contact-info-item">
+                  <span class="contact-info-lbl">Class:</span>
+                  <span class="contact-info-val">Class 10</span>
+                </li>
+                <li class="contact-info-item">
+                  <span class="contact-info-lbl">Purpose:</span>
+                  <span class="contact-info-val">A frontend demonstration of an AI-assisted research paper analysis platform.</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="contact-nav-col">
+              <!-- Heading 3 strictly used -->
+              <h3>Interactive Controls</h3>
+              <p>Return to the document upload sandbox or record evaluator notes.</p>
+
+              <!-- Button returning back to upload section -->
+              <a href="#upload" class="btn btn-cyan" id="btnReturnToUpload" style="width: 100%;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 19V5M5 12l7-7 7 7"/>
+                </svg>
+                Back to Upload Section
+              </a>
+
+              <!-- Evaluator feedback demonstration -->
+              <form id="evaluationForm" onsubmit="handleEvaluationSubmit(event)">
+                <div class="input-field-group" style="margin-bottom: 12px;">
+                  <label for="evaluatorName" class="input-field-lbl">Evaluator Name</label>
+                  <input type="text" id="evaluatorName" class="input-field-ctrl" placeholder="e.g. Teacher" required>
+                </div>
+                <div class="input-field-group" style="margin-bottom: 16px;">
+                  <label for="evaluatorRemarks" class="input-field-lbl">Assessment Remarks</label>
+                  <input type="text" id="evaluatorRemarks" class="input-field-ctrl" placeholder="Enter practical remarks..." required>
+                </div>
+                <button type="submit" class="btn btn-glass" style="width: 100%;">
+                  Record Evaluation Note
+                </button>
+              </form>
+              <div id="evaluationFeedback" style="display: none; font-size: 0.85rem; color: var(--color-cyan); font-weight: 600; text-align: center;">
+                Evaluation note recorded successfully!
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========================================================================
+       8. FOOTER
+       Midnight Navy & Deep Indigo Finish
+       ======================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-content-grid">
+        <div class="footer-brand-area">
+          <!-- Heading 3 strictly used -->
+          <h3 class="footer-logo-title">ResearchPortal</h3>
+          <p>Effortless Research Paper Analysis</p>
+          <div class="footer-student-box">
+            <div><strong>Project Assigned By:</strong> Prince Das, Computer Teacher</div>
+            <div><strong>Design By:</strong> Ankit Raj</div>
+            <div><strong>Class:</strong> Class 10</div>
+          </div>
+        </div>
+
+        <div class="footer-links-col">
+          <!-- Heading 3 strictly used -->
+          <h3>Navigation</h3>
+          <ul class="footer-links-list">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#features">Key Features</a></li>
+            <li><a href="#upload">Upload Paper</a></li>
+            <li><a href="#visualizations">Analysis Visualizations</a></li>
+            <li><a href="#about">About The Project</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links-col">
+          <!-- Heading 3 strictly used -->
+          <h3>System Scope</h3>
+          <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 16px;">
+            A responsive frontend demonstration developed for the Class 10 Computer Practical exam. Showcases semantic glassmorphism, responsive components, and client-side PDF ingestion.
+          </p>
+          <a href="#upload" class="btn btn-cyan" style="padding: 10px 18px; font-size: 0.85rem;">
+            Test Upload Sandbox
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-bottom-bar">
+        <div>Copyright &copy; 2026 ResearchPortal. All rights reserved.</div>
+        <div>Designed By: Ankit Raj &bull; Class 10</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Login Modal Dialog (Client Demonstration) -->
+  <div class="cyber-modal-overlay" id="loginModal" role="dialog" aria-modal="true" aria-labelledby="modalHeading">
+    <div class="cyber-modal-container">
+      <button type="button" class="modal-exit-btn" id="modalExitBtn" aria-label="Close authentication dialog">&times;</button>
+      <h3 id="modalHeading" style="font-size: 1.6rem; margin-bottom: 8px;">Portal Authentication</h3>
+      <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 20px;">
+        ResearchPortal Academic Demonstration Access
+      </p>
+      <form onsubmit="handleDemoAuth(event)">
+        <div class="input-field-group" style="margin-bottom: 14px;">
+          <label for="authEmail" class="input-field-lbl">Academic ID / Email</label>
+          <input type="email" id="authEmail" class="input-field-ctrl" value="student@academic.edu" required>
+        </div>
+        <div class="input-field-group" style="margin-bottom: 20px;">
+          <label for="authPassword" class="input-field-lbl">Password</label>
+          <input type="password" id="authPassword" class="input-field-ctrl" value="••••••••" required>
+        </div>
+        <button type="submit" class="btn btn-cyan" style="width: 100%;">Access Portal</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       CLIENT-SIDE JAVASCRIPT
+       Interactive Navigation, Drag-and-Drop, Validation, and Modals
+       ======================================================================== -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Mobile Drawer Navigation
+      const menuToggle = document.getElementById('menuToggle');
+      const navMenu = document.getElementById('navMenu');
+      const navLinks = document.querySelectorAll('.nav-link');
+
+      if (menuToggle && navMenu) {
+        menuToggle.addEventListener('click', () => {
+          navMenu.classList.toggle('open');
+        });
+
+        navLinks.forEach(link => {
+          link.addEventListener('click', () => {
+            navMenu.classList.remove('open');
+          });
+        });
+      }
+
+      // 2. Active Anchor Highlighting on Scroll
+      const sections = document.querySelectorAll('section[id]');
+      window.addEventListener('scroll', () => {
+        let current = '';
+        const scrollPosition = window.pageYOffset + 140;
+
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop;
+          const sectionHeight = section.offsetHeight;
+          if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+            current = section.getAttribute('id');
+          }
+        });
+
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === `#${current}`) {
+            link.classList.add('active');
+          }
+        });
+      });
+
+      // 3. Drag and Drop PDF File Ingestion
+      const dropzone = document.getElementById('pdfDropzone');
+      const fileInput = document.getElementById('pdfFileInput');
+      const selectedFilePanel = document.getElementById('selectedFilePanel');
+      const fileNameText = document.getElementById('fileNameText');
+      const fileSizeText = document.getElementById('fileSizeText');
+      const btnDiscardFile = document.getElementById('btnDiscardFile');
+      const uploadMsgBox = document.getElementById('uploadMsgBox');
+
+      function showMessage(msg, type = 'error') {
+        if (!uploadMsgBox) return;
+        uploadMsgBox.textContent = msg;
+        uploadMsgBox.className = `upload-msg-box ${type}`;
+        uploadMsgBox.style.display = 'block';
+      }
+
+      function hideMessage() {
+        if (!uploadMsgBox) return;
+        uploadMsgBox.style.display = 'none';
+        uploadMsgBox.textContent = '';
+      }
+
+      function handleIncomingFile(file) {
+        hideMessage();
+        if (!file) return;
+
+        // Basic PDF file type validation
+        const isPdf = file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf');
+        
+        if (!isPdf) {
+          showMessage('Unsupported format. Please select a valid PDF research paper (.pdf only).', 'error');
+          if (selectedFilePanel) selectedFilePanel.classList.remove('active');
+          if (fileInput) fileInput.value = '';
+          return;
+        }
+
+        const sizeMb = (file.size / (1024 * 1024)).toFixed(2);
+        
+        if (fileNameText) fileNameText.textContent = file.name;
+        if (fileSizeText) fileSizeText.textContent = `${sizeMb} MB • Frontend verified`;
+        if (selectedFilePanel) selectedFilePanel.classList.add('active');
+
+        showMessage(`Ready for parsing: "${file.name}" (Demonstration mode active).`, 'success');
+      }
+
+      if (fileInput) {
+        fileInput.addEventListener('change', (e) => {
+          if (e.target.files && e.target.files[0]) {
+            handleIncomingFile(e.target.files[0]);
+          }
+        });
+      }
+
+      if (dropzone) {
+        ['dragenter', 'dragover'].forEach(name => {
+          dropzone.addEventListener(name, (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            dropzone.classList.add('dragover');
+          });
+        });
+
+        ['dragleave', 'drop'].forEach(name => {
+          dropzone.addEventListener(name, (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            dropzone.classList.remove('dragover');
+          });
+        });
+
+        dropzone.addEventListener('drop', (e) => {
+          if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0]) {
+            handleIncomingFile(e.dataTransfer.files[0]);
+          }
+        });
+      }
+
+      if (btnDiscardFile) {
+        btnDiscardFile.addEventListener('click', (e) => {
+          e.stopPropagation();
+          if (fileInput) fileInput.value = '';
+          if (selectedFilePanel) selectedFilePanel.classList.remove('active');
+          hideMessage();
+        });
+      }
+
+      // 4. Modal Authentication Dialog
+      const btnLoginNav = document.getElementById('btnLoginNav');
+      const loginModal = document.getElementById('loginModal');
+      const modalExitBtn = document.getElementById('modalExitBtn');
+
+      if (btnLoginNav && loginModal && modalExitBtn) {
+        btnLoginNav.addEventListener('click', () => {
+          loginModal.classList.add('active');
+        });
+
+        modalExitBtn.addEventListener('click', () => {
+          loginModal.classList.remove('active');
+        });
+
+        loginModal.addEventListener('click', (e) => {
+          if (e.target === loginModal) {
+            loginModal.classList.remove('active');
+          }
+        });
+      }
+    });
+
+    // Evaluation Remarks Handler
+    function handleEvaluationSubmit(e) {
+      e.preventDefault();
+      const toast = document.getElementById('evaluationFeedback');
+      if (toast) {
+        toast.style.display = 'block';
+        setTimeout(() => {
+          toast.style.display = 'none';
+        }, 4000);
+      }
+      e.target.reset();
+    }
+
+    // Demo Auth Handler
+    function handleDemoAuth(e) {
+      e.preventDefault();
+      const loginModal = document.getElementById('loginModal');
+      alert('Authentication simulated: Logged in as student Ankit Raj.');
+      if (loginModal) loginModal.classList.remove('active');
+    }
+  </script>
+</body>
+</html>

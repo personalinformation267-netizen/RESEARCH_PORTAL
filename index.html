@@ -1,0 +1,2114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ResearchPortal — Effortless Research Paper Analysis | Amar Kumar</title>
+  <meta name="description" content="Upload, summarize, and explore insights from academic papers using AI-powered tools. A Class 10 Computer Practical project by Amar Kumar.">
+  
+  <!-- Modern Academic Typography: Plus Jakarta Sans & Newsreader -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;0,6..72,700;1,6..72,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       RESEARCHPORTAL DESIGN SYSTEM
+       Theme: Editorial Academic / Scientific Research Platform
+       Palette: Warm Off-White, Pure White, Deep Forest Green, Emerald, Soft Mint
+       ========================================================================== */
+    :root {
+      --bg-page: #F7F8F5;
+      --bg-surface: #FFFFFF;
+      --bg-subtle: #F0F3EF;
+      --bg-mint: #DDF5E9;
+      --bg-mint-soft: #EEFBF4;
+      
+      --color-forest: #123B32;
+      --color-emerald: #0F9D78;
+      --color-emerald-dark: #0A7358;
+      --color-charcoal: #202824;
+      --color-text-muted: #596A62;
+      --color-border: #E5E9E4;
+      --color-border-accent: #C2E2D3;
+      
+      --font-serif: 'Newsreader', Georgia, serif;
+      --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      
+      --radius-sm: 6px;
+      --radius-md: 12px;
+      --radius-lg: 18px;
+      --radius-xl: 24px;
+      
+      --shadow-subtle: 0 4px 20px rgba(18, 59, 50, 0.05);
+      --shadow-card: 0 10px 30px rgba(18, 59, 50, 0.08);
+      --shadow-elevated: 0 20px 40px rgba(18, 59, 50, 0.12);
+      
+      --transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+      --container-max: 1240px;
+    }
+
+    /* Base Reset & Typography */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-page);
+      color: var(--color-charcoal);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      transition: var(--transition);
+    }
+
+    button, input {
+      font-family: inherit;
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* All visible headings are styled strictly using H3 as mandated */
+    h3 {
+      font-family: var(--font-serif);
+      font-weight: 700;
+      color: var(--color-forest);
+      line-height: 1.25;
+      margin: 0;
+    }
+
+    .section-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--color-emerald);
+      margin-bottom: 12px;
+      background: var(--bg-mint);
+      padding: 4px 12px;
+      border-radius: 100px;
+      width: fit-content;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 3.4vw, 2.75rem);
+      margin-bottom: 16px;
+      letter-spacing: -0.015em;
+    }
+
+    .section-description {
+      font-size: 1.1rem;
+      color: var(--color-text-muted);
+      max-width: 680px;
+      line-height: 1.7;
+    }
+
+    .section-header-center {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 56px;
+    }
+
+    /* Buttons & Badges */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 13px 26px;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: var(--transition);
+    }
+
+    .btn-primary {
+      background-color: var(--color-forest);
+      color: #FFFFFF;
+      box-shadow: 0 4px 14px rgba(18, 59, 50, 0.22);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--color-emerald);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(15, 157, 120, 0.28);
+    }
+
+    .btn-secondary {
+      background-color: var(--bg-surface);
+      color: var(--color-forest);
+      border-color: var(--color-border);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--bg-subtle);
+      border-color: var(--color-emerald);
+      color: var(--color-emerald);
+    }
+
+    .btn-emerald {
+      background-color: var(--color-emerald);
+      color: #FFFFFF;
+    }
+
+    .btn-emerald:hover {
+      background-color: var(--color-emerald-dark);
+      transform: translateY(-2px);
+    }
+
+    /* ==========================================================================
+       HEADER & NAVIGATION
+       ========================================================================== */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background-color: rgba(247, 248, 245, 0.94);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--color-border);
+      transition: var(--transition);
+    }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 76px;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      width: 38px;
+      height: 38px;
+      background: var(--color-forest);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #FFFFFF;
+    }
+
+    .logo-icon svg {
+      width: 22px;
+      height: 22px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+    }
+
+    .logo-text-wrap {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .logo-title {
+      font-family: var(--font-serif);
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: var(--color-forest);
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+    }
+
+    .logo-badge {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--color-emerald);
+      text-transform: uppercase;
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      list-style: none;
+      gap: 28px;
+    }
+
+    .nav-link {
+      font-size: 0.93rem;
+      font-weight: 500;
+      color: var(--color-charcoal);
+      position: relative;
+      padding: 6px 0;
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: var(--color-emerald);
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--color-emerald);
+      transition: var(--transition);
+    }
+
+    .nav-link:hover::after, .nav-link.active::after {
+      width: 100%;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .btn-login {
+      padding: 8px 18px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      border-radius: var(--radius-sm);
+      background: transparent;
+      color: var(--color-forest);
+      border: 1.5px solid var(--color-forest);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-login:hover {
+      background: var(--color-forest);
+      color: #FFFFFF;
+    }
+
+    /* Mobile Hamburger Menu */
+    .menu-toggle {
+      display: none;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      color: var(--color-forest);
+    }
+
+    .menu-toggle svg {
+      width: 26px;
+      height: 26px;
+    }
+
+    /* ==========================================================================
+       HERO SECTION (Using hero3.jpg)
+       Split Editorial Style with Warm Overlay
+       ========================================================================== */
+    .hero-section {
+      position: relative;
+      padding: 64px 0 88px;
+      background-image: url('assets/images/hero3.jpg');
+      background-size: cover;
+      background-position: center right;
+      background-repeat: no-repeat;
+      border-bottom: 1px solid var(--color-border);
+      overflow: hidden;
+    }
+
+    /* Soft academic editorial overlay ensuring optimal readability */
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, 
+        rgba(247, 248, 245, 0.97) 0%, 
+        rgba(247, 248, 245, 0.94) 52%, 
+        rgba(247, 248, 245, 0.78) 100%);
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      position: relative;
+      z-index: 10;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .hero-content {
+      max-width: 640px;
+    }
+
+    .academic-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 14px;
+      background: var(--bg-surface);
+      border: 1px solid var(--color-border-accent);
+      border-radius: 100px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--color-forest);
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-subtle);
+    }
+
+    .academic-pill-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--color-emerald);
+      animation: pulseDot 2s infinite ease-in-out;
+    }
+
+    @keyframes pulseDot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.8); }
+    }
+
+    .hero-title {
+      font-size: clamp(2.4rem, 4.4vw, 3.8rem);
+      font-weight: 700;
+      line-height: 1.12;
+      color: var(--color-forest);
+      letter-spacing: -0.025em;
+      margin-bottom: 20px;
+    }
+
+    .hero-description {
+      font-size: 1.2rem;
+      line-height: 1.65;
+      color: var(--color-text-muted);
+      margin-bottom: 32px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+      margin-bottom: 36px;
+    }
+
+    .hero-stats-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 28px;
+      padding-top: 24px;
+      border-top: 1px solid var(--color-border);
+    }
+
+    .hero-stat-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .hero-stat-num {
+      font-family: var(--font-serif);
+      font-size: 1.55rem;
+      font-weight: 700;
+      color: var(--color-forest);
+      line-height: 1.1;
+    }
+
+    .hero-stat-label {
+      font-size: 0.82rem;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Right visual frame */
+    .hero-visual-card {
+      position: relative;
+      background: var(--bg-surface);
+      border-radius: var(--radius-lg);
+      padding: 14px;
+      box-shadow: var(--shadow-elevated);
+      border: 1px solid var(--color-border);
+    }
+
+    .hero-visual-img {
+      width: 100%;
+      height: 380px;
+      object-fit: cover;
+      border-radius: calc(var(--radius-lg) - 6px);
+      border: 1px solid var(--color-border);
+    }
+
+    .hero-floating-badge {
+      position: absolute;
+      bottom: -16px;
+      left: 32px;
+      background: var(--bg-surface);
+      border-left: 4px solid var(--color-emerald);
+      padding: 12px 20px;
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-card);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-top: 1px solid var(--color-border);
+      border-right: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .badge-icon {
+      width: 32px;
+      height: 32px;
+      background: var(--bg-mint);
+      color: var(--color-emerald);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.85rem;
+    }
+
+    .badge-text-title {
+      font-size: 0.86rem;
+      font-weight: 700;
+      color: var(--color-forest);
+    }
+
+    .badge-text-sub {
+      font-size: 0.74rem;
+      color: var(--color-text-muted);
+    }
+
+    /* ==========================================================================
+       ABOUT THE PROJECT
+       Editorial Layout with Tech Stack & Student Credentials
+       ========================================================================== */
+    .about-section {
+      padding: 100px 0;
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      align-items: center;
+    }
+
+    .about-info-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .editorial-quote {
+      font-family: var(--font-serif);
+      font-size: 1.35rem;
+      line-height: 1.5;
+      font-style: italic;
+      color: var(--color-forest);
+      border-left: 3px solid var(--color-emerald);
+      padding-left: 20px;
+      margin: 10px 0;
+    }
+
+    /* Academic Tech Stack Card */
+    .tech-stack-card {
+      background: var(--bg-page);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 24px;
+    }
+
+    .tech-stack-header {
+      font-family: var(--font-sans);
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--color-forest);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .tech-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .tech-badge {
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 6px 14px;
+      background: var(--bg-surface);
+      color: var(--color-charcoal);
+      border-radius: 100px;
+      border: 1px solid var(--color-border);
+      transition: var(--transition);
+    }
+
+    .tech-badge:hover {
+      border-color: var(--color-emerald);
+      color: var(--color-emerald);
+    }
+
+    /* Student Submission Card */
+    .student-cred-card {
+      background: var(--bg-mint-soft);
+      border: 1px solid var(--color-border-accent);
+      border-radius: var(--radius-md);
+      padding: 24px;
+    }
+
+    .student-cred-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-top: 12px;
+    }
+
+    .cred-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cred-label {
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--color-text-muted);
+      font-weight: 600;
+    }
+
+    .cred-value {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--color-forest);
+    }
+
+    .about-illustration-wrap {
+      position: relative;
+    }
+
+    .about-main-img {
+      width: 100%;
+      height: 480px;
+      object-fit: cover;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-card);
+    }
+
+    .editorial-caption {
+      margin-top: 12px;
+      font-size: 0.82rem;
+      color: var(--color-text-muted);
+      text-align: right;
+      font-style: italic;
+    }
+
+    /* ==========================================================================
+       UPLOAD YOUR RESEARCH PAPER (Using hero2.jpg)
+       High-Contrast Academic Panel Over AI Backdrop
+       ========================================================================== */
+    .upload-section {
+      position: relative;
+      padding: 100px 0;
+      background-image: url('assets/images/hero2.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: #FFFFFF;
+      overflow: hidden;
+    }
+
+    .upload-section-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(18, 59, 50, 0.88);
+      backdrop-filter: blur(4px);
+    }
+
+    .upload-wrapper {
+      position: relative;
+      z-index: 10;
+      max-width: 780px;
+      margin: 0 auto;
+    }
+
+    .upload-header {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+
+    .upload-header h3 {
+      color: #FFFFFF;
+      font-size: clamp(2rem, 3.4vw, 2.75rem);
+      margin-bottom: 12px;
+    }
+
+    .upload-header p {
+      color: #D1E5DC;
+      font-size: 1.05rem;
+    }
+
+    /* Light Editorial Upload Card placed over dark background */
+    .upload-card {
+      background: #FFFFFF;
+      color: var(--color-charcoal);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .dropzone {
+      border: 2px dashed var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 44px 24px;
+      text-align: center;
+      background: var(--bg-page);
+      cursor: pointer;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .dropzone:hover, .dropzone.dragover {
+      border-color: var(--color-emerald);
+      background: var(--bg-mint-soft);
+      transform: scale(1.005);
+    }
+
+    .dropzone-icon {
+      width: 68px;
+      height: 68px;
+      margin: 0 auto 16px;
+      background: var(--bg-mint);
+      color: var(--color-emerald);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+
+    .dropzone:hover .dropzone-icon {
+      transform: translateY(-4px);
+      background: var(--color-emerald);
+      color: #FFFFFF;
+    }
+
+    .dropzone-icon svg {
+      width: 34px;
+      height: 34px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+    }
+
+    .dropzone-main-text {
+      font-family: var(--font-serif);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--color-forest);
+      margin-bottom: 6px;
+    }
+
+    .dropzone-sub-text {
+      font-size: 0.95rem;
+      color: var(--color-text-muted);
+      margin-bottom: 20px;
+    }
+
+    .file-input-hidden {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    /* Selected File State */
+    .file-status-box {
+      margin-top: 24px;
+      padding: 16px 20px;
+      background: var(--bg-mint-soft);
+      border: 1px solid var(--color-border-accent);
+      border-radius: var(--radius-sm);
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    .file-status-box.active {
+      display: flex;
+    }
+
+    .file-info-group {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .file-icon-pdf {
+      width: 38px;
+      height: 38px;
+      background: #E53E3E;
+      color: #FFFFFF;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.72rem;
+      letter-spacing: 0.05em;
+    }
+
+    .file-meta-name {
+      font-weight: 600;
+      color: var(--color-forest);
+      font-size: 0.94rem;
+    }
+
+    .file-meta-size {
+      font-size: 0.78rem;
+      color: var(--color-text-muted);
+    }
+
+    .btn-remove-file {
+      background: transparent;
+      border: none;
+      color: #E53E3E;
+      cursor: pointer;
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 4px 8px;
+    }
+
+    .btn-remove-file:hover {
+      text-decoration: underline;
+    }
+
+    .upload-alert {
+      margin-top: 16px;
+      padding: 12px 16px;
+      border-radius: var(--radius-sm);
+      font-size: 0.88rem;
+      display: none;
+    }
+
+    .upload-alert.error {
+      display: block;
+      background: #FFF5F5;
+      color: #C53030;
+      border: 1px solid #FEB2B2;
+    }
+
+    .upload-alert.success {
+      display: block;
+      background: #F0FFF4;
+      color: #276749;
+      border: 1px solid #9AE6B4;
+    }
+
+    .upload-demo-note {
+      margin-top: 24px;
+      font-size: 0.82rem;
+      color: #718096;
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    /* ==========================================================================
+       KEY FEATURES
+       Light Editorial Feature Presentation with Emerald Accents
+       ========================================================================== */
+    .features-section {
+      padding: 100px 0;
+      background-color: var(--bg-page);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 32px;
+    }
+
+    .feature-card {
+      background: var(--bg-surface);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid var(--color-border);
+      border-top: 4px solid var(--color-emerald);
+      box-shadow: var(--shadow-subtle);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-elevated);
+      border-top-color: var(--color-forest);
+    }
+
+    .feature-img-wrap {
+      position: relative;
+      height: 200px;
+      overflow: hidden;
+      background: var(--bg-subtle);
+    }
+
+    .feature-card-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .feature-card:hover .feature-card-img {
+      transform: scale(1.05);
+    }
+
+    .feature-num-badge {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 32px;
+      height: 32px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(4px);
+      color: var(--color-forest);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-serif);
+      font-weight: 700;
+      font-size: 0.9rem;
+      border: 1px solid var(--color-border);
+    }
+
+    .feature-body {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .feature-title {
+      font-size: 1.35rem;
+      color: var(--color-forest);
+      margin-bottom: 10px;
+      font-family: var(--font-serif);
+    }
+
+    .feature-desc {
+      font-size: 0.95rem;
+      color: var(--color-text-muted);
+      line-height: 1.6;
+      margin-bottom: 20px;
+      flex-grow: 1;
+    }
+
+    .feature-tag {
+      font-size: 0.74rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--color-emerald);
+      background: var(--bg-mint);
+      padding: 4px 10px;
+      border-radius: 4px;
+      width: fit-content;
+    }
+
+    /* ==========================================================================
+       ANALYSIS VISUALIZATIONS
+       Presentational Academic Visualization Panels
+       ========================================================================== */
+    .vis-section {
+      padding: 100px 0;
+      background-color: var(--bg-surface);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .vis-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 36px;
+    }
+
+    .vis-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .vis-card:hover {
+      box-shadow: var(--shadow-elevated);
+      border-color: var(--color-border-accent);
+    }
+
+    .vis-card-header {
+      padding: 22px 28px;
+      border-bottom: 1px solid var(--color-border);
+      background: var(--bg-page);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .vis-card-title {
+      font-size: 1.3rem;
+      font-family: var(--font-serif);
+      color: var(--color-forest);
+    }
+
+    .vis-badge-demo {
+      font-size: 0.74rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--color-forest);
+      background: var(--bg-mint);
+      padding: 4px 10px;
+      border-radius: 100px;
+    }
+
+    .vis-img-container {
+      padding: 20px;
+      background: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .vis-img {
+      width: 100%;
+      height: auto;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--color-border);
+    }
+
+    .vis-footer {
+      padding: 18px 28px;
+      background: var(--bg-page);
+      border-top: 1px solid var(--color-border);
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .vis-source-tag {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--color-emerald);
+    }
+
+    /* ==========================================================================
+       CONTACT & SUBMISSION SECTION
+       Editorial Inquiry & Teacher Submission Details
+       ========================================================================== */
+    .contact-section {
+      padding: 100px 0;
+      background: var(--bg-page);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .contact-card-container {
+      max-width: 880px;
+      margin: 0 auto;
+      background: var(--bg-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: 48px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .contact-col-info {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .contact-col-info h3 {
+      font-size: 1.85rem;
+      color: var(--color-forest);
+    }
+
+    .contact-col-info p {
+      font-size: 0.98rem;
+      color: var(--color-text-muted);
+      line-height: 1.65;
+    }
+
+    .contact-meta-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .contact-meta-item {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      font-size: 0.92rem;
+    }
+
+    .contact-meta-label {
+      font-weight: 700;
+      color: var(--color-forest);
+      min-width: 140px;
+    }
+
+    .contact-meta-val {
+      color: var(--color-charcoal);
+    }
+
+    .contact-col-action {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      background: var(--bg-page);
+      padding: 28px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--color-border);
+    }
+
+    .contact-col-action h3 {
+      font-size: 1.25rem;
+      font-family: var(--font-sans);
+      font-weight: 700;
+      color: var(--color-forest);
+    }
+
+    .contact-col-action p {
+      font-size: 0.88rem;
+      color: var(--color-text-muted);
+    }
+
+    /* Feedback form demonstration */
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--color-forest);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .form-input {
+      padding: 10px 14px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      font-size: 0.9rem;
+      outline: none;
+      transition: var(--transition);
+      background: #FFFFFF;
+    }
+
+    .form-input:focus {
+      border-color: var(--color-emerald);
+      box-shadow: 0 0 0 3px rgba(15, 157, 120, 0.15);
+    }
+
+    /* ==========================================================================
+       FOOTER
+       Deep Forest Green Sophisticated Finish
+       ========================================================================== */
+    .site-footer {
+      background-color: var(--color-forest);
+      color: #E8F1EC;
+      padding: 72px 0 36px;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 56px;
+    }
+
+    .footer-brand h3 {
+      color: #FFFFFF;
+      font-size: 1.75rem;
+      margin-bottom: 12px;
+    }
+
+    .footer-brand p {
+      color: #C0D6CB;
+      font-size: 0.98rem;
+      max-width: 380px;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .footer-col h3 {
+      color: #FFFFFF;
+      font-size: 1.15rem;
+      margin-bottom: 18px;
+      font-family: var(--font-sans);
+      font-weight: 700;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-links a {
+      color: #C0D6CB;
+      font-size: 0.92rem;
+    }
+
+    .footer-links a:hover {
+      color: var(--color-mint);
+      padding-left: 4px;
+    }
+
+    .footer-cred-box {
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: var(--radius-sm);
+      padding: 16px;
+      font-size: 0.88rem;
+      line-height: 1.7;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      padding-top: 28px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      font-size: 0.84rem;
+      color: #9ABCB0;
+    }
+
+    /* Modal Dialog for Login Demo */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(18, 59, 50, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-backdrop.active {
+      display: flex;
+    }
+
+    .modal-box {
+      background: #FFFFFF;
+      border-radius: var(--radius-md);
+      max-width: 440px;
+      width: 100%;
+      padding: 32px;
+      box-shadow: var(--shadow-elevated);
+      position: relative;
+    }
+
+    .modal-close-btn {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: transparent;
+      border: none;
+      font-size: 1.4rem;
+      cursor: pointer;
+      color: var(--color-charcoal);
+    }
+
+    /* ==========================================================================
+       RESPONSIVE ADAPTATIONS (360px, 390px, 768px, 1366px)
+       ========================================================================== */
+    @media (max-width: 992px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      
+      .vis-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .footer-top {
+        grid-template-columns: 1fr;
+        gap: 36px;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .navbar {
+        height: 68px;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      .nav-menu {
+        position: fixed;
+        top: 68px;
+        left: 0;
+        right: 0;
+        background: var(--bg-surface);
+        flex-direction: column;
+        padding: 24px 20px;
+        gap: 18px;
+        border-bottom: 1px solid var(--color-border);
+        box-shadow: var(--shadow-card);
+        transform: translateY(-120%);
+        opacity: 0;
+        pointer-events: none;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+      }
+
+      .nav-menu.open {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .hero-section {
+        padding: 44px 0 64px;
+      }
+
+      .hero-title {
+        font-size: 2.2rem;
+      }
+
+      .upload-card {
+        padding: 24px;
+      }
+
+      .contact-card-container {
+        padding: 28px 20px;
+      }
+
+      .student-cred-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 390px) {
+      .hero-title {
+        font-size: 1.95rem;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        width: 100%;
+      }
+    }
+
+    /* ==========================================================================
+       PRINT SPECIFIC STYLES (For school report / practical submission)
+       ========================================================================== */
+    @media print {
+      body {
+        background: #FFFFFF !important;
+        color: #000000 !important;
+        font-size: 12pt;
+      }
+
+      .site-header, .menu-toggle, .btn-login, .hero-actions, .dropzone-icon, .btn-remove-file {
+        display: none !important;
+      }
+
+      .hero-section, .upload-section {
+        background-image: none !important;
+        color: #000000 !important;
+        padding: 20px 0 !important;
+      }
+
+      .hero-overlay, .upload-section-overlay {
+        display: none !important;
+      }
+
+      .upload-card {
+        box-shadow: none !important;
+        border: 1px solid #000000 !important;
+        color: #000000 !important;
+      }
+
+      .site-footer {
+        background: #FFFFFF !important;
+        color: #000000 !important;
+        border-top: 1px solid #CCCCCC !important;
+      }
+
+      .site-footer h3, .site-footer p {
+        color: #000000 !important;
+      }
+
+      .feature-card, .vis-card, .contact-card-container {
+        break-inside: avoid;
+        box-shadow: none !important;
+        border: 1px solid #999999 !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========================================================================
+       1. NAVIGATION BAR
+       ======================================================================== -->
+  <header class="site-header" id="site-header">
+    <div class="container navbar">
+      <a href="#home" class="brand-logo" aria-label="ResearchPortal Home">
+        <div class="logo-icon">
+          <!-- Academic Quill & Document SVG -->
+          <svg viewBox="0 0 24 24">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+          </svg>
+        </div>
+        <div class="logo-text-wrap">
+          <span class="logo-title">ResearchPortal</span>
+          <span class="logo-badge">Academic AI Suite</span>
+        </div>
+      </a>
+
+      <!-- Desktop & Mobile Navigation Links -->
+      <nav>
+        <ul class="nav-menu" id="nav-menu">
+          <li><a href="#home" class="nav-link active">Home</a></li>
+          <li><a href="#features" class="nav-link">Features</a></li>
+          <li><a href="#upload" class="nav-link">Upload</a></li>
+          <li><a href="#visualizations" class="nav-link">Visualizations</a></li>
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <button type="button" class="btn-login" id="loginBtn" aria-label="Open portal login">Login</button>
+        <button type="button" class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ======================================================================
+         2. HERO SECTION (Using hero3.jpg)
+         ====================================================================== -->
+    <section class="hero-section" id="home">
+      <div class="hero-overlay"></div>
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <div class="academic-pill">
+            <span class="academic-pill-dot"></span>
+            Class 10 Computer Practical Project &bull; Roll 4
+          </div>
+          <!-- Visible Heading 3 as required -->
+          <h3 class="hero-title">Effortless Research Paper Analysis</h3>
+          <p class="hero-description">
+            Upload, summarize, and explore insights from academic papers using AI-powered tools.
+          </p>
+          <div class="hero-actions">
+            <a href="#upload" class="btn btn-primary" id="heroUploadCta">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="17 8 12 3 7 8"></polyline>
+                <line x1="12" y1="3" x2="12" y2="15"></line>
+              </svg>
+              Upload Paper
+            </a>
+            <a href="#features" class="btn btn-secondary">
+              Explore Capabilities
+            </a>
+          </div>
+          <div class="hero-stats-row">
+            <div class="hero-stat-item">
+              <span class="hero-stat-num">4 Core</span>
+              <span class="hero-stat-label">AI Modules</span>
+            </div>
+            <div class="hero-stat-item">
+              <span class="hero-stat-num">NLP</span>
+              <span class="hero-stat-label">Paper Synthesis</span>
+            </div>
+            <div class="hero-stat-item">
+              <span class="hero-stat-num">Fast</span>
+              <span class="hero-stat-label">Client Extraction</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Side Rounded Scientific Illustration Frame -->
+        <div class="hero-visual-card">
+          <img src="assets/images/research-workspace.jpg" alt="Scientific research workspace with academic papers and analytics" class="hero-visual-img" id="heroWorkspaceImg">
+          <div class="hero-floating-badge">
+            <div class="badge-icon">AI</div>
+            <div>
+              <div class="badge-text-title">Academic Extraction Engine</div>
+              <div class="badge-text-sub">Instant Semantic Discovery</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         3. ABOUT THE PROJECT
+         ====================================================================== -->
+    <section class="about-section" id="about">
+      <div class="container">
+        <div class="about-grid">
+          <div class="about-info-panel">
+            <span class="section-eyebrow">Academic Initiative</span>
+            <!-- Heading 3 -->
+            <h3 class="section-title">About The Project</h3>
+            <p class="section-description">
+              This project leverages AI and Natural Language Processing (NLP) to analyze research papers, generate summaries, extract keywords, and visualize trends.
+            </p>
+
+            <blockquote class="editorial-quote">
+              "Transforming complex scholarly literature into intelligible, structured knowledge graphs through automated computation."
+            </blockquote>
+
+            <!-- Technology Stack Panel -->
+            <div class="tech-stack-card">
+              <div class="tech-stack-header">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-emerald)" stroke-width="2">
+                  <polyline points="16 18 22 12 16 6"></polyline>
+                  <polyline points="8 6 2 12 8 18"></polyline>
+                </svg>
+                Demonstrated Tech Stack Architecture
+              </div>
+              <div class="tech-badges">
+                <span class="tech-badge">Python</span>
+                <span class="tech-badge">AI/ML</span>
+                <span class="tech-badge">NLP</span>
+                <span class="tech-badge">PDF Parsing</span>
+                <span class="tech-badge">Chart.js</span>
+                <span class="tech-badge">Modern Web Front-end</span>
+              </div>
+            </div>
+
+            <!-- Student Submission Credentials -->
+            <div class="student-cred-card">
+              <span class="section-eyebrow" style="margin-bottom: 6px;">School Submission Profile</span>
+              <div class="student-cred-grid">
+                <div class="cred-item">
+                  <span class="cred-label">Project Assigned By</span>
+                  <span class="cred-value">Prince Das, Computer Teacher</span>
+                </div>
+                <div class="cred-item">
+                  <span class="cred-label">Designed By</span>
+                  <span class="cred-value">Amar Kumar</span>
+                </div>
+                <div class="cred-item">
+                  <span class="cred-label">Class</span>
+                  <span class="cred-value">Class 10</span>
+                </div>
+                <div class="cred-item">
+                  <span class="cred-label">Roll Number</span>
+                  <span class="cred-value">Roll Number 4</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="about-illustration-wrap">
+            <img src="assets/images/research-illustration.jpg" alt="Scholars and researchers conducting academic literature review" class="about-main-img">
+            <p class="editorial-caption">Figure 1.0 &mdash; Collaborative research environment & scholarly literature review methodology.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         4. UPLOAD YOUR RESEARCH PAPER (Using hero2.jpg)
+         ====================================================================== -->
+    <section class="upload-section" id="upload">
+      <div class="upload-section-overlay"></div>
+      <div class="container upload-wrapper">
+        <div class="upload-header">
+          <span class="section-eyebrow" style="background: rgba(221, 245, 233, 0.2); color: #A7F3D0;">Interactive Prototype</span>
+          <!-- Heading 3 -->
+          <h3 class="section-title">Upload Your Research Paper</h3>
+          <p>Select or drag and drop a PDF research manuscript to demonstrate frontend document ingestion.</p>
+        </div>
+
+        <div class="upload-card">
+          <!-- Dropzone -->
+          <div class="dropzone" id="pdfDropzone" tabindex="0" role="button" aria-label="PDF upload dropzone">
+            <input type="file" id="pdfFileInput" class="file-input-hidden" accept=".pdf,application/pdf" aria-label="PDF file selector">
+            <div class="dropzone-icon">
+              <svg viewBox="0 0 24 24">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="12" y1="18" x2="12" y2="12"></line>
+                <line x1="9" y1="15" x2="12" y2="12"></line>
+                <line x1="15" y1="15" x2="12" y2="12"></line>
+              </svg>
+            </div>
+            <!-- Required text verbatim -->
+            <div class="dropzone-main-text">Drag & Drop your PDF here</div>
+            <div class="dropzone-sub-text">or click to browse</div>
+            <button type="button" class="btn btn-secondary" style="pointer-events: none;">
+              Select PDF File
+            </button>
+          </div>
+
+          <!-- Alert Notification Area -->
+          <div class="upload-alert" id="uploadAlert" role="alert"></div>
+
+          <!-- File Selected Display State -->
+          <div class="file-status-box" id="fileStatusBox">
+            <div class="file-info-group">
+              <div class="file-icon-pdf">PDF</div>
+              <div>
+                <div class="file-meta-name" id="fileNameDisplay">manuscript-sample.pdf</div>
+                <div class="file-meta-size" id="fileSizeDisplay">2.4 MB &bull; Client-side verified</div>
+              </div>
+            </div>
+            <button type="button" class="btn-remove-file" id="btnRemoveFile" aria-label="Remove selected file">Remove</button>
+          </div>
+
+          <p class="upload-demo-note">
+            <strong>Demonstration Notice:</strong> PDF selection is demonstrated on the frontend interface. Client-side file type verification is active. In accordance with project specifications, no actual server uploads or backend operations are executed.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         5. KEY FEATURES
+         ====================================================================== -->
+    <section class="features-section" id="features">
+      <div class="container">
+        <div class="section-header-center">
+          <span class="section-eyebrow">Core Capabilities</span>
+          <!-- Heading 3 -->
+          <h3 class="section-title">Key Features</h3>
+          <p class="section-description">
+            Explore the four foundational modules designed to streamline academic inquiry, paper summarization, and bibliographic synthesis.
+          </p>
+        </div>
+
+        <div class="features-grid">
+          <!-- Feature 1: PDF Analysis -->
+          <article class="feature-card">
+            <div class="feature-img-wrap">
+              <img src="assets/images/pdf-analysis.jpg" alt="PDF document parsing and analysis illustration" class="feature-card-img">
+              <span class="feature-num-badge">01</span>
+            </div>
+            <div class="feature-body">
+              <span class="feature-tag">Document Extraction</span>
+              <h3 class="feature-title">PDF Analysis</h3>
+              <p class="feature-desc">Analyze PDFs instantly with AI tools.</p>
+              <div style="font-size: 0.8rem; color: var(--color-text-muted);">Instant multi-column parsing & metadata capture</div>
+            </div>
+          </article>
+
+          <!-- Feature 2: Summary Generation -->
+          <article class="feature-card">
+            <div class="feature-img-wrap">
+              <img src="assets/images/summary-generation.jpg" alt="Academic summary generation and synthesis illustration" class="feature-card-img">
+              <span class="feature-num-badge">02</span>
+            </div>
+            <div class="feature-body">
+              <span class="feature-tag">NLP Synthesis</span>
+              <h3 class="feature-title">Summary Generation</h3>
+              <p class="feature-desc">Generate detailed summaries for each topic.</p>
+              <div style="font-size: 0.8rem; color: var(--color-text-muted);">Executive abstracts and methodology digests</div>
+            </div>
+          </article>
+
+          <!-- Feature 3: Topic Modeling -->
+          <article class="feature-card">
+            <div class="feature-img-wrap">
+              <img src="assets/images/topic-modeling.jpg" alt="Topic modeling and research clustering illustration" class="feature-card-img">
+              <span class="feature-num-badge">03</span>
+            </div>
+            <div class="feature-body">
+              <span class="feature-tag">Semantic Clustering</span>
+              <h3 class="feature-title">Topic Modeling</h3>
+              <p class="feature-desc">Discover key topics and trends from papers.</p>
+              <div style="font-size: 0.8rem; color: var(--color-text-muted);">Latent Dirichlet Allocation (LDA) clusters</div>
+            </div>
+          </article>
+
+          <!-- Feature 4: Citation Extraction -->
+          <article class="feature-card">
+            <div class="feature-img-wrap">
+              <img src="assets/images/citation-management.jpg" alt="Citation management and bibliographic reference illustration" class="feature-card-img">
+              <span class="feature-num-badge">04</span>
+            </div>
+            <div class="feature-body">
+              <span class="feature-tag">Reference Linking</span>
+              <h3 class="feature-title">Citation Extraction</h3>
+              <p class="feature-desc">Organize references and citations quickly.</p>
+              <div style="font-size: 0.8rem; color: var(--color-text-muted);">Automated BibTeX and APA standard indexing</div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         6. ANALYSIS VISUALIZATIONS
+         ====================================================================== -->
+    <section class="vis-section" id="visualizations">
+      <div class="container">
+        <div class="section-header-center">
+          <span class="section-eyebrow">Empirical Insights</span>
+          <!-- Heading 3 -->
+          <h3 class="section-title">Analysis Visualizations</h3>
+          <p class="section-description">
+            Presentational research data visualizations depicting corpus keyword frequency and publication trend trajectories.
+          </p>
+        </div>
+
+        <div class="vis-grid">
+          <!-- Visualization 1: Keyword Frequency Chart -->
+          <div class="vis-card">
+            <div class="vis-card-header">
+              <!-- Heading 3 -->
+              <h3 class="vis-card-title">Keyword Frequency Chart</h3>
+              <span class="vis-badge-demo">Demonstration Data</span>
+            </div>
+            <div class="vis-img-container">
+              <img src="assets/images/keyword-chart.jpg" alt="Keyword Frequency Chart illustrating research term frequencies" class="vis-img" id="keywordChartImg">
+            </div>
+            <div class="vis-footer">
+              <span>Metric: TF-IDF Frequency Distribution</span>
+              <span class="vis-source-tag">Sample Corpus N=1,420 Papers</span>
+            </div>
+          </div>
+
+          <!-- Visualization 2: Topic Trend Chart -->
+          <div class="vis-card">
+            <div class="vis-card-header">
+              <!-- Heading 3 -->
+              <h3 class="vis-card-title">Topic Trend Chart</h3>
+              <span class="vis-badge-demo">Demonstration Data</span>
+            </div>
+            <div class="vis-img-container">
+              <img src="assets/images/topic-trend-chart.jpg" alt="Topic Trend Chart showing annual research publication progression" class="vis-img" id="topicTrendChartImg">
+            </div>
+            <div class="vis-footer">
+              <span>Progression: 2020 &mdash; 2026 Academic Growth Index</span>
+              <span class="vis-source-tag">Peer-Reviewed Trend Line</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         7. CONTACT & SUBMISSION SECTION
+         ====================================================================== -->
+    <section class="contact-section" id="contact">
+      <div class="container">
+        <div class="contact-card-container">
+          <div class="contact-grid">
+            <div class="contact-col-info">
+              <span class="section-eyebrow">Academic Assessment</span>
+              <!-- Heading 3 -->
+              <h3 class="section-title" style="font-size: 2rem;">Contact & Submission</h3>
+              <p>
+                This project has been developed and submitted as part of the Class 10 Computer Practical coursework under teacher supervision.
+              </p>
+              
+              <ul class="contact-meta-list">
+                <li class="contact-meta-item">
+                  <span class="contact-meta-label">Project Name:</span>
+                  <span class="contact-meta-val">ResearchPortal</span>
+                </li>
+                <li class="contact-meta-item">
+                  <span class="contact-meta-label">Project Assigned By:</span>
+                  <span class="contact-meta-val">Prince Das, Computer Teacher</span>
+                </li>
+                <li class="contact-meta-item">
+                  <span class="contact-meta-label">Design By:</span>
+                  <span class="contact-meta-val">Amar Kumar</span>
+                </li>
+                <li class="contact-meta-item">
+                  <span class="contact-meta-label">Academic Class:</span>
+                  <span class="contact-meta-val">Class 10</span>
+                </li>
+                <li class="contact-meta-item">
+                  <span class="contact-meta-label">Roll Number:</span>
+                  <span class="contact-meta-val">4</span>
+                </li>
+                <li class="contact-meta-item">
+                  <span class="contact-meta-label">Project Purpose:</span>
+                  <span class="contact-meta-val">Frontend demonstration of a research paper analysis platform.</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="contact-col-action">
+              <!-- Heading 3 -->
+              <h3>Quick Navigation & Feedback</h3>
+              <p>Return to test the PDF selection interface or leave student feedback.</p>
+
+              <!-- Action button navigating back to upload area -->
+              <a href="#upload" class="btn btn-primary" id="btnBackToUpload" style="width: 100%;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 19V5M5 12l7-7 7 7"/>
+                </svg>
+                Back to Upload Area
+              </a>
+
+              <!-- Client-side Interactive Form -->
+              <form id="feedbackForm" onsubmit="handleFeedback(event)">
+                <div class="form-group" style="margin-bottom: 12px;">
+                  <label for="feedbackName" class="form-label">Reviewer Name</label>
+                  <input type="text" id="feedbackName" class="form-input" placeholder="e.g. Evaluator" required>
+                </div>
+                <div class="form-group" style="margin-bottom: 16px;">
+                  <label for="feedbackMsg" class="form-label">Remarks / Review</label>
+                  <input type="text" id="feedbackMsg" class="form-input" placeholder="Enter practical assessment notes..." required>
+                </div>
+                <button type="submit" class="btn btn-secondary" style="width: 100%;">
+                  Record Evaluation Note
+                </button>
+              </form>
+              <div id="feedbackToast" style="display: none; font-size: 0.85rem; color: var(--color-emerald); font-weight: 600; text-align: center;">
+                Evaluation note recorded successfully!
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========================================================================
+       8. FOOTER
+       Deep Forest Green Finish with Mandatory Credits
+       ======================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <!-- Heading 3 -->
+          <h3 class="footer-title">ResearchPortal</h3>
+          <p>Effortless Research Paper Analysis</p>
+          <div class="footer-cred-box">
+            <div><strong>Project Assigned By:</strong> Prince Das, Computer Teacher</div>
+            <div><strong>Design By:</strong> Amar Kumar</div>
+            <div><strong>Academic Record:</strong> Class 10 | Roll Number 4</div>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <!-- Heading 3 -->
+          <h3>Navigation</h3>
+          <ul class="footer-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#features">Key Features</a></li>
+            <li><a href="#upload">Upload Paper</a></li>
+            <li><a href="#visualizations">Analysis Visualizations</a></li>
+            <li><a href="#about">About The Project</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <!-- Heading 3 -->
+          <h3>Technical Scope</h3>
+          <p style="font-size: 0.88rem; color: #C0D6CB; line-height: 1.6; margin-bottom: 16px;">
+            A responsive, accessible frontend demonstration developed for the Class 10 Computer Practical exam. Integrates client-side validation, editorial typography, and high-contrast research dashboards.
+          </p>
+          <a href="#upload" class="btn btn-emerald" style="padding: 10px 18px; font-size: 0.85rem;">
+            Test Upload Panel
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>Copyright &copy; 2026 ResearchPortal. All rights reserved.</div>
+        <div>Designed By: Amar Kumar &bull; Class 10 &bull; Roll Number 4</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Login Modal Dialog (Client Demonstration) -->
+  <div class="modal-backdrop" id="loginModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-box">
+      <button type="button" class="modal-close-btn" id="modalCloseBtn" aria-label="Close login dialog">&times;</button>
+      <h3 id="modalTitle" style="font-size: 1.6rem; margin-bottom: 8px;">Portal Access</h3>
+      <p style="font-size: 0.88rem; color: var(--color-text-muted); margin-bottom: 20px;">
+        ResearchPortal Academic Demonstration Authentication
+      </p>
+      <form onsubmit="handleDemoLogin(event)">
+        <div class="form-group" style="margin-bottom: 14px;">
+          <label for="loginEmail" class="form-label">Academic Email / ID</label>
+          <input type="email" id="loginEmail" class="form-input" value="student@school.edu" required>
+        </div>
+        <div class="form-group" style="margin-bottom: 20px;">
+          <label for="loginPass" class="form-label">Password</label>
+          <input type="password" id="loginPass" class="form-input" value="••••••••" required>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%;">Enter Dashboard</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       CLIENT-SIDE JAVASCRIPT
+       Interactive Navigation, Drag-and-Drop, Validation, and Modals
+       ======================================================================== -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Mobile Menu Toggle
+      const menuToggle = document.getElementById('menuToggle');
+      const navMenu = document.getElementById('navMenu');
+      const navLinks = document.querySelectorAll('.nav-link');
+
+      if (menuToggle && navMenu) {
+        menuToggle.addEventListener('click', () => {
+          navMenu.classList.toggle('open');
+        });
+
+        // Close menu when navigation link is clicked
+        navLinks.forEach(link => {
+          link.addEventListener('click', () => {
+            navMenu.classList.remove('open');
+          });
+        });
+      }
+
+      // 2. Navigation Active State on Scroll
+      const sections = document.querySelectorAll('section[id]');
+      window.addEventListener('scroll', () => {
+        let current = '';
+        const scrollPosition = window.pageYOffset + 120;
+
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop;
+          const sectionHeight = section.offsetHeight;
+          if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+            current = section.getAttribute('id');
+          }
+        });
+
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === `#${current}`) {
+            link.classList.add('active');
+          }
+        });
+      });
+
+      // 3. Drag and Drop PDF File Selection
+      const dropzone = document.getElementById('pdfDropzone');
+      const fileInput = document.getElementById('pdfFileInput');
+      const fileStatusBox = document.getElementById('fileStatusBox');
+      const fileNameDisplay = document.getElementById('fileNameDisplay');
+      const fileSizeDisplay = document.getElementById('fileSizeDisplay');
+      const btnRemoveFile = document.getElementById('btnRemoveFile');
+      const uploadAlert = document.getElementById('uploadAlert');
+
+      function showAlert(message, type = 'error') {
+        if (!uploadAlert) return;
+        uploadAlert.textContent = message;
+        uploadAlert.className = `upload-alert ${type}`;
+        uploadAlert.style.display = 'block';
+      }
+
+      function hideAlert() {
+        if (!uploadAlert) return;
+        uploadAlert.style.display = 'none';
+        uploadAlert.textContent = '';
+      }
+
+      function processSelectedFile(file) {
+        hideAlert();
+        if (!file) return;
+
+        // Basic file type validation for PDF
+        const isPdf = file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf');
+        
+        if (!isPdf) {
+          showAlert('Please upload a valid PDF document (.pdf format only).', 'error');
+          if (fileStatusBox) fileStatusBox.classList.remove('active');
+          if (fileInput) fileInput.value = '';
+          return;
+        }
+
+        // Format file size
+        const sizeMb = (file.size / (1024 * 1024)).toFixed(2);
+        
+        if (fileNameDisplay) fileNameDisplay.textContent = file.name;
+        if (fileSizeDisplay) fileSizeDisplay.textContent = `${sizeMb} MB • Ready for client extraction demo`;
+        if (fileStatusBox) fileStatusBox.classList.add('active');
+
+        showAlert(`Successfully verified "${file.name}". Client-side simulation active.`, 'success');
+      }
+
+      if (fileInput) {
+        fileInput.addEventListener('change', (e) => {
+          if (e.target.files && e.target.files[0]) {
+            processSelectedFile(e.target.files[0]);
+          }
+        });
+      }
+
+      if (dropzone) {
+        ['dragenter', 'dragover'].forEach(eventName => {
+          dropzone.addEventListener(eventName, (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            dropzone.classList.add('dragover');
+          });
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+          dropzone.addEventListener(eventName, (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            dropzone.classList.remove('dragover');
+          });
+        });
+
+        dropzone.addEventListener('drop', (e) => {
+          if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0]) {
+            processSelectedFile(e.dataTransfer.files[0]);
+          }
+        });
+      }
+
+      if (btnRemoveFile) {
+        btnRemoveFile.addEventListener('click', (e) => {
+          e.stopPropagation();
+          if (fileInput) fileInput.value = '';
+          if (fileStatusBox) fileStatusBox.classList.remove('active');
+          hideAlert();
+        });
+      }
+
+      // 4. Modal Login Dialog
+      const loginBtn = document.getElementById('loginBtn');
+      const loginModal = document.getElementById('loginModal');
+      const modalCloseBtn = document.getElementById('modalCloseBtn');
+
+      if (loginBtn && loginModal && modalCloseBtn) {
+        loginBtn.addEventListener('click', () => {
+          loginModal.classList.add('active');
+        });
+
+        modalCloseBtn.addEventListener('click', () => {
+          loginModal.classList.remove('active');
+        });
+
+        loginModal.addEventListener('click', (e) => {
+          if (e.target === loginModal) {
+            loginModal.classList.remove('active');
+          }
+        });
+      }
+    });
+
+    // Feedback Submission handler
+    function handleFeedback(e) {
+      e.preventDefault();
+      const toast = document.getElementById('feedbackToast');
+      if (toast) {
+        toast.style.display = 'block';
+        setTimeout(() => {
+          toast.style.display = 'none';
+        }, 4000);
+      }
+      e.target.reset();
+    }
+
+    // Demo Login handler
+    function handleDemoLogin(e) {
+      e.preventDefault();
+      const loginModal = document.getElementById('loginModal');
+      alert('Authentication verified for demonstration: Logged in as student.');
+      if (loginModal) loginModal.classList.remove('active');
+    }
+  </script>
+</body>
+</html>
